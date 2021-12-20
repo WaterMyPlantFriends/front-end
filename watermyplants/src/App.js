@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import Signup from './components/Signup'
-import Login from './components/login'
+import Login from './components/Login'
 import Header from './components/Header'
-import {BrowserRouter as Route, Switch } from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // import Profile from './components/Profile'
 
 
@@ -12,16 +12,15 @@ function App() {
     
     <div className="App">
       <h1>Water My Plants</h1>
-      <Route>
+      <Router>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path from="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
           <Route path="/header" component={Header} />
           {/* <Route path="/profile" component={Profile} /> */}
-
         </Switch>
-      </Route>
+      </Router>
 
    
     </div>
