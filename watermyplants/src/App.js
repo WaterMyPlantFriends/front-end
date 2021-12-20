@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Signup from './components/signup'
+import Signup from './components/Signup'
 import Header from './components/Header'
 import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
@@ -10,13 +10,13 @@ function App() {
     
     <div className="App">
       <Header />
-      <RouteContainer>
+      {/* <RouteContainer>
         <Switch>
           <Route exact path="/" />
           <Route exact path from="/signup" component={Signup} />
           <PrivateRoute path="/" />
         </Switch>
-      </RouteContainer>
+      </RouteContainer> */}
     </div>
   );
 }
