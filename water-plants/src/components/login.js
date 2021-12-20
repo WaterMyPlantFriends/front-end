@@ -10,6 +10,7 @@ const initialFormValues = {
 const initialFormErrors = {
     username: '',
     password: '',
+    loginAttempt: '',
 }
 const initialDisabled=true;
 
@@ -51,7 +52,13 @@ export default function login(props) {
                 // we get a token, but what do we do with it?
             })
             .catch(err => {
+                // we failed to login
                 console.error(err);
+                const loginError = {
+                    ...formErrors,
+                    loginAttempt: 'Login failed. Please try again.',
+                }
+                setFormErrors=loginError;
             })
             .finally(() => setFormValues(initialFormValues))
     }
@@ -68,6 +75,7 @@ export default function login(props) {
                 {/* errors here */}
                 <div>{errors.username}</div>
                 <div>{errors.password}</div>
+                <div>{errors.loginAttempt}</div>
             </div>
             {/* Form */}
             <div className='form-container'>
