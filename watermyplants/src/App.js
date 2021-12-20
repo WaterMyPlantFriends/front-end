@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.css';
-import Signup from './components/Signup'
-import {BrowserRouter as Router, Switch, Redirect} from 'react-router-dom'
+import Signup from './components/signup'
+import Header from './components/Header'
+import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 
 function App() {
   return (
     
     <div className="App">
-      <h1>Water My Plants</h1>
+      <Header />
       <RouteContainer>
         <Switch>
           <Route exact path="/" />
@@ -16,8 +17,6 @@ function App() {
           <PrivateRoute path="/" />
         </Switch>
       </RouteContainer>
-
-   
     </div>
   );
 }
