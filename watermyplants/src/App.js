@@ -11,13 +11,13 @@ function App() {
   return (
     
     <div className="App">
+      <Header />
       <h1>Water My Plants</h1>
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/header" component={Header} />
           {/* <Route path="/profile" component={Profile} /> */}
         </Switch>
       </Router>
