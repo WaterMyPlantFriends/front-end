@@ -21,8 +21,6 @@ function App() {
           {/* <Route path="/profile" component={Profile} /> */}
         </Switch>
       </Router>
-
-   
     </div>
   );
 }
