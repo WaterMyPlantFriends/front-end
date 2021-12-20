@@ -1,6 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-=======
 
 
 export default function Profile({ details }) {
@@ -15,4 +13,3 @@ export default function Profile({ details }) {
         </div>
         )
 }
->>>>>>> 8d8b4508b348bb302c1cc0ac3df26a8ac47d059f
