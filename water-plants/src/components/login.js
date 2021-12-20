@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import * as yup from 'yup';
 import loginSchema from './validation/loginSchema';
 
@@ -19,22 +20,40 @@ export default function login(props) {
     const [disabled, setDisabled] = useState(initialDisabled);
     // functions
     const validate = (name, value) => {
+        // validate with yup
         yup.reach(loginSchema, name)
             .validate(value)
             .then(() => setFormErrors({ ...formErrors, [name]: '' }))
             .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0] }))
     }
-    const inputChange = (name, value) => {
+    const onChange = evt => {
+        const { name, value } = evt.target;
         // validate
         validate(name, value);
+        // update formValues
         setFormValues({
             ...formValues,
             [name]: value,
         })
     }
-    const onChange = evt => {
-        const { name, value } = evt.target;
-        inputChange(name, value);
+    const onSubmit = evt => {
+        // construct loginAttempt
+        const loginAttempt = {
+            username: formValues.username.trim(),
+            password: formValues.password.trim(),
+        }
+        // POST login attempt
+        postLogin(loginAttempt);
+    }
+    const postLogin = loginAttempt => {
+        axios.post('https://watermyplantz.herokuapp.com/api/auth/login', loginAttempt)
+            .then(resp => {
+                // we get a token, but what do we do with it?
+            })
+            .catch(err => {
+                console.error(err);
+            })
+            .finally(() => setFormValues(initialFormValues))
     }
     // update login button when formValues change
     useEffect(() => {
