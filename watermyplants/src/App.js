@@ -3,7 +3,8 @@ import './App.css';
 import Signup from './components/Signup'
 import Login from './components/login'
 import Header from './components/Header'
-import {BroswerRouter as Router, Switch, Redirect} from 'react-router-dom'
+import {BrowserRouter as Route, Switch } from 'react-router-dom'
+// import Profile from './components/Profile'
 
 
 function App() {
@@ -11,16 +12,16 @@ function App() {
     
     <div className="App">
       <h1>Water My Plants</h1>
-      <RouteContainer>
+      <Route>
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/login" component={Login} />
           <Route exact path from="/signup" component={Signup} />
-          <PrivateRoute path="/header" component={Header} />
-          <PrivateRoute path="/profile" component={Profile} />
+          <Route path="/header" component={Header} />
+          {/* <Route path="/profile" component={Profile} /> */}
 
         </Switch>
-      </RouteContainer>
+      </Route>
 
    
     </div>
