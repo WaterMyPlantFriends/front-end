@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import loginSchema from './validation/loginSchema';
+import loginSchema from '../validation/loginSchema';
 
 const StyledForm = styled.form`
     display: flex;
@@ -56,7 +56,7 @@ const initialFormErrors = {
 }
 const initialDisabled=true;
 
-export default function login(props) {
+export default function Login(props) {
     // state slices
     const [formValues, setFormValues] = useState(initialFormValues);
     const [formErrors, setFormErrors] = useState(initialFormErrors);
@@ -117,9 +117,9 @@ export default function login(props) {
             <h2>Login</h2> 
             <div className='errors'>
                 {/* errors here */}
-                <div>{errors.username}</div>
-                <div>{errors.password}</div>
-                <div>{errors.loginAttempt}</div>
+                <div>{formErrors.username}</div>
+                <div>{formErrors.password}</div>
+                <div>{formErrors.loginAttempt}</div>
             </div>
             {/* Form */}
             <div className='form-container'>
@@ -127,7 +127,7 @@ export default function login(props) {
                     <label><p>Username</p>
                         <input
                             id='username'
-                            value={values.username}
+                            value={formValues.username}
                             onChange={onChange}
                             name='username'
                             type='text'
@@ -138,7 +138,7 @@ export default function login(props) {
                     <label><p>Password</p>
                         <input
                             id='password'
-                            value={values.password}
+                            value={formValues.password}
                             onChange={onChange}
                             name='password'
                             type='password'
