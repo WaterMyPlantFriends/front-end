@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import * as yup from 'yup';
 import loginSchema from './validation/loginSchema';
 
-const StyledDiv = styled.div`
+const StyledForm = styled.form`
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
@@ -91,7 +91,8 @@ export default function login(props) {
     const postLogin = loginAttempt => {
         axios.post('https://watermyplantz.herokuapp.com/api/auth/login', loginAttempt)
             .then(resp => {
-                // we get a token, but what do we do with it?
+                // we login successfully and get a token
+
             })
             .catch(err => {
                 // we failed to login
@@ -112,7 +113,7 @@ export default function login(props) {
 
     // return Login element
     return (
-        <StyledDiv>
+        <StyledForm onSubmit={onSubmit}>
             <h2>Login</h2> 
             <div className='errors'>
                 {/* errors here */}
@@ -146,7 +147,7 @@ export default function login(props) {
                 </div>
                 <button type='submit' id='loginBtn' disabled={disabled}>Login</button>
             </div>
-        </StyledDiv>
+        </StyledForm>
     )
     
 }
