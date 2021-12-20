@@ -1,7 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import * as yup from 'yup';
 import loginSchema from './validation/loginSchema';
+
+const StyledDiv = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 2%; 5%;
+    background-color: '#006e51';
+    color: '#313639';
+    border-style: double;
+    border-color: '#004f3a';
+    outline: 5px solid '#10ffbf';
+    h2 {
+        color: '#afffea';
+    }
+    .form-container {
+        width: 100%;
+    }
+    .errors {
+        color: '#f8f8ff';
+    }
+    .username {
+        width: 90%;
+    }
+    .username p {
+        display: inline;
+        margin-right: 1%;
+    }
+    .password {
+        width: 90%;
+    }
+    .password p {
+        display: inline;
+        margin-right: 1%;
+    }
+    #loginBtn {
+        width: 40%;
+        padding: 2%;
+        margin: 1% auto;
+    }
+`
 
 const initialFormValues = {
     username: '',
@@ -67,9 +109,10 @@ export default function login(props) {
         loginSchema.isValid(formValues)
             .then(valid => setDisabled(!valid));
     }, [formValues]);
+
     // return Login element
     return (
-        <>
+        <StyledDiv>
             <h2>Login</h2> 
             <div className='errors'>
                 {/* errors here */}
@@ -103,7 +146,7 @@ export default function login(props) {
                 </div>
                 <button type='submit' id='loginBtn' disabled={disabled}>Login</button>
             </div>
-        </>
+        </StyledDiv>
     )
     
 }
