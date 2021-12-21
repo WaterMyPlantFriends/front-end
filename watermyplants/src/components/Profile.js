@@ -4,7 +4,7 @@ import '../Styles/Profile.css'
 
 
 export default function Profile {
-    // get specific logged in user to render their profile
+    // WIP get specific logged in user to render their profile
     function getUser (userName){
         axios.get(`api call to ${userName}`)
         .then(response => {
@@ -16,7 +16,7 @@ export default function Profile {
         })
         .finally(() => console.log("WOOOOOHOOOO I WORK!"))
     }
-    // get list of user plants and render to list
+    // WIP get user's plants and render to list
     function getPlants (plants){
         plants.forEach(Plant =>{
             axios.get(`url for users plants input`)
