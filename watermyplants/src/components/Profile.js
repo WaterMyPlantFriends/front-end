@@ -4,17 +4,7 @@ import '../Styles/Profile.css'
 
 
 export default function Profile {
-    const profileCard = document.querySelector(.cards)
-
-    function getPlants (plants){
-        followers.forEach(Plant =>{
-            axios.get(`url for users plants input`)
-            .then(res => {
-            document.querySelector('.cards').append(profileCardMaker(response.data))}
-            )
-        })
-    }
-
+    // get specific logged in user to render their profile
     function getUser (userName){
         axios.get(`api call to ${userName}`)
         .then(response => {
@@ -26,33 +16,41 @@ export default function Profile {
         })
         .finally(() => console.log("WOOOOOHOOOO I WORK!"))
     }
-
-    function profileCardMaker(user) {
-        const profileCard = document.createElement('div')
-        const profileCardContainer = document.createElement('div')
-        const cardImage = document.createElement('img')
-        const cardInfo = document.createElement('div')
-        const cardName = document.createElement('h3')
-        const cardUserName = document.createElement('p')
-        const cardPlants = document.createElement('p')
-
-        profileCard.classList.add('card-profile')
-        profileCardContainer.classList.add('profile-container')
-        cardImage.src = user.avatar_url
-        cardInfo.classList.add('card-info')
-        cardName.classList.add('name')
-        cardName.textContent = user.name
-        cardUserName.classList.add('username')
-        cardUserName.textContent = user.login
-        cardPlants.textContent = `Plants: ${user.plants}`
-
-        profileCard.appendChild(profileCardContainer)
-        profileCardContainer.appendChild(cardImage)
-        cardInfo.appendChild(cardName)
-        cardInfo.appendChild(cardUserName)
-        cardInfo.appendChild(cardUserName)
-        cardInfo.appendChild(cardPlants)
-    
-        return profileCard
+    // get list of user plants and render to list
+    function getPlants (plants){
+        plants.forEach(Plant =>{
+            axios.get(`url for users plants input`)
+            .then(res => {
+            document.querySelector('.cards').append(profileCardMaker(response.data))}
+            )
+        })
     }
+
+    return (
+        <div className='profile-container'>
+            <div className='profile-card'>
+                <div className='title-container'>
+                    <img
+                        class="round"
+                        src={details.img}
+                        alt="user"
+                    />
+                    <h3>{details.name}</h3>
+                    <h6>{details.username}</h6>
+                <div class="plants">
+                    {
+                        !!details.plants && !!details.plants.length &&
+                        <div>
+                            <h6>Plants:</h6>
+                            <ul>
+                            {details.plants.map((plant, idx) => <li key={idx}>{plant}</li>)}    
+                            </ul> 
+                        </div>       
+                }
+                        </div>
+                </div>
+            </div>
+        </div>
+    )
+
 }
