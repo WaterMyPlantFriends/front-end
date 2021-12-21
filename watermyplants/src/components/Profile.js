@@ -76,7 +76,7 @@ export default function Profile() {
                 <div className='title-container'>
                 <p>ID: {user.user_id}</p>
                 <p>Username: {user.username}</p>
-                <p>Email: {email}</p>
+                <p>Email: {user.email}</p>
                 <p>Phone: {user.phone}</p>
                 {plants.map(plant => (
                     <div key={plant} className="plants">
