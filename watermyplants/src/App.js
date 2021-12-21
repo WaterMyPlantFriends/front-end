@@ -53,14 +53,13 @@ function App() {
                 </div>
                 <nav>
                     <Router>
-                        <Route exact path='/' />
                         <Link to="/"><button id='home'>HOME</button></Link>
                         <Route exact path='/Login' />
-                        <Link to="/"><button id='login'>LOGIN</button></Link>
+                        <Link to="/Login"><button id='login'>LOGIN</button></Link>
                         <Route exact path='/Signup' />
-                        <Link to="/"><button id='signup'>SIGN UP</button></Link>
+                        <Link to="/SignUp"><button id='signup'>SIGN UP</button></Link>
                         <Route exact path='/Profile' />
-                        <Link to="/"><button id='profile'>PROFILE</button></Link>
+                        <Link to="/Profile"><button id='profile'>PROFILE</button></Link>
                     </Router>
                 </nav>
             </div>
