@@ -1,17 +1,11 @@
-import styled from "styled-components";
+import PlantDisplay from "./PlantDisplay";
 
-const Home = () => {
+function Home() {
   return (
-    <StyledHome>
     <div>
-      <h1>Home</h1>
+      <PlantDisplay/>
     </div>
-    </StyledHome>
   );
 };
 
 export default Home;
-
-const StyledHome = styled.div` 
-
-`

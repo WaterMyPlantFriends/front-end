@@ -31,9 +31,8 @@ export default function PlantDisplay(props){
     const getPlants = () => {
         axios.get('https://watermyplantz.herokuapp.com/api/plants')
             .then(resp => {
-                console.log(resp.data);
-                // setPlants here
                 setPlants(resp.data);
+                console.log(resp.data)
             })
             .catch(err => {
                 console.error(err);
@@ -46,7 +45,7 @@ export default function PlantDisplay(props){
     return (
         <StyledDiv className='plantDisplay container'>
             {
-                plants.map(plant => {
+                plants.filter(p => p.user_id === null).map(plant => {
                     return(
                         <Plant
                             id={plant.plant_id}
