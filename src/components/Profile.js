@@ -7,6 +7,8 @@ export default function Profile() {
   const uid = localStorage.getItem("uid");
   const [plants, setPlants] = useState();
   // WIP get specific logged in user to render their profile
+
+  let user_id = 0; // delete
   useEffect(() => {
     axios
       .get(`https://watermyplantz.herokuapp.com/api/users/${user_id}`)
