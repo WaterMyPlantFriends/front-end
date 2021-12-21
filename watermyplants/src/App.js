@@ -12,7 +12,6 @@ function App() {
     
     <div className="App">
       <Header />
-      <h1>Water My Plants</h1>
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
