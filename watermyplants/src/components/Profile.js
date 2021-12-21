@@ -1,5 +1,4 @@
 import React, {useState, useEffect}from 'react';
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios';
 
@@ -45,23 +44,21 @@ const StyledProfile = styled.div`
         padding: 7px;
     }
 `
-export default function Profile(props) {
-    const [user, setUser] = useState();
+export default function Profile() {
+    const [user, setUser] = useState({});
+    const uid = localStorage.getItem('uid');
     const [plants, setPlants] = useState();
-    const {user_id} = useParams()
     // WIP get specific logged in user to render their profile
-    useEffect (() => {
+    useEffect(() => {
         axios.get(`https://watermyplantz.herokuapp.com/api/users/${user_id}`)
-        .then(response => {
-        setUser(response.data)
-        console.log(response.data)
+        .then(res => {
+            setUser(res.data);
+            console.log(res.data);
         })
-        .catch(error => {
-        console.error(error)
-        })
-        .finally(() => console.log("WOOOOOHOOOO I WORK!"))
-    })
-    // WIP get user's plants and render to list
+        .catch(err => console.log(err));
+    }, [])
+
+
     useEffect(() => {
         axios.get(`https://watermyplantz.herokuapp.com/api/users/${user_id}/plants`)
             .then(response => {
@@ -73,19 +70,14 @@ export default function Profile(props) {
             });
     }, []);
 
-    if (!Profile) {
-        return <div>Loading profile information...</div>;
-        }
-
-        const { name, username, email, userPlants} = Profile;
-
     return (
         <StyledProfile>
             <div className='profile-card'>
                 <div className='title-container'>
-                    <h3>{name}</h3>
-                    <h6>{username}</h6>
-                    <h6>{email}</h6>
+                <p>ID: {user.user_id}</p>
+                <p>Username: {user.username}</p>
+                <p>Email: {email}</p>
+                <p>Phone: {user.phone}</p>
                 {plants.map(plant => (
                     <div key={plant} className="plants">
                         {plant}
