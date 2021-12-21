@@ -4,7 +4,6 @@ import './App.css';
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-// import Profile from './components/Profile'
 
 const StyledHeader = styled.div`
     .header-container {
