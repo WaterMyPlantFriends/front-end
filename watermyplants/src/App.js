@@ -12,12 +12,11 @@ function App() {
     
     <div className="App">
       <Header />
-      <h1>Water My Plants</h1>
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
+          <Route path="/Login" component={Login} />
+          <Route path="/Signup" component={Signup} />
           {/* <Route path="/profile" component={Profile} /> */}
         </Switch>
       </Router>
