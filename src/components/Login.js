@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import * as yup from "yup";
 import loginSchema from "../validation/loginSchema";
+import { useNavigate } from "react-router";
 
 const initialFormValues = {
   username: "",
@@ -16,6 +17,7 @@ const initialFormErrors = {
 const initialDisabled = true;
 
 export default function Login(props) {
+  const navigate = useNavigate();
   // state slices
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
@@ -41,6 +43,7 @@ export default function Login(props) {
   };
   const onSubmit = (evt) => {
     // construct loginAttempt
+    evt.preventDefault();
     const loginAttempt = {
       username: formValues.username.trim(),
       password: formValues.password.trim(),
@@ -49,10 +52,13 @@ export default function Login(props) {
     postLogin(loginAttempt);
   };
   const postLogin = (loginAttempt) => {
+    console.log(loginAttempt)
     axios
       .post("https://watermyplantz.herokuapp.com/api/auth/login", loginAttempt)
       .then((resp) => {
         // we login successfully and get a token
+        localStorage.setItem("token", resp.data.token);
+        navigate("/profile");
       })
       .catch((err) => {
         // we failed to login

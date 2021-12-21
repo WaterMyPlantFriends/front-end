@@ -8,7 +8,7 @@ export default function Profile() {
   const [plants, setPlants] = useState();
   // WIP get specific logged in user to render their profile
 
-  let user_id = 0; // delete
+  let user_id = 1;
   useEffect(() => {
     axios
       .get(`https://watermyplantz.herokuapp.com/api/users/${user_id}`)
@@ -21,9 +21,9 @@ export default function Profile() {
 
   useEffect(() => {
     axios
-      .get(`https://watermyplantz.herokuapp.com/api/users/${user_id}/plants`)
+      .get(`https://watermyplantz.herokuapp.com/api/plants`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setPlants(response.data);
       })
       .catch((error) => {
@@ -35,15 +35,16 @@ export default function Profile() {
     <StyledProfile>
       <div className="profile-card">
         <div className="title-container">
+          <h1>Profile</h1>
           <p>ID: {user.user_id}</p>
           <p>Username: {user.username}</p>
           <p>Email: {user.email}</p>
           <p>Phone: {user.phone}</p>
-          {plants.map((plant) => (
+          {/* {plants.map((plant) => (
             <div key={plant} className="plants">
               {plant}
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </StyledProfile>
