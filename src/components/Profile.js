@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import axiosWithAuth from "../utilities/axiosWithAuth";
 
 export default function Profile() {
-  const [user, setUser] = useState({});
-  const uid = localStorage.getItem("uid");
-  const [plants, setPlants] = useState();
+  const [user, setUser] = useState(null);
+  // const uid = localStorage.getItem("uid");
+  const [plants, setPlants] = useState(null);
   // WIP get specific logged in user to render their profile
 
   let user_id = 1;
@@ -20,10 +21,10 @@ export default function Profile() {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`https://watermyplantz.herokuapp.com/api/plants`)
+    axiosWithAuth()
+      .get(`/users/${user_id}/plants`)
       .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         setPlants(response.data);
       })
       .catch((error) => {
@@ -31,6 +32,9 @@ export default function Profile() {
       });
   }, []);
 
+  if (!user) {
+    return <h1>Loading</h1>
+  }
   return (
     <StyledProfile>
       <div className="profile-card">
@@ -40,11 +44,11 @@ export default function Profile() {
           <p>Username: {user.username}</p>
           <p>Email: {user.email}</p>
           <p>Phone: {user.phone}</p>
-          {/* {plants.map((plant) => (
-            <div key={plant} className="plants">
-              {plant}
+          {plants && plants.map((plant) => (
+            <div key={plant.plant_id} className="plants">
+              <p>{plant.nickname}</p>
             </div>
-          ))} */}
+          ))}
         </div>
       </div>
     </StyledProfile>
