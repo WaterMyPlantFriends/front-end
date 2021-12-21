@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../Styles/Profile.css'
 
 
-export default function Profile({ details }) {
+export default function Profile {
     const profileCard = document.querySelector(.cards)
 
     function getPlants (plants){
