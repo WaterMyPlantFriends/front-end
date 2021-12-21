@@ -15,15 +15,15 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<SignUp/>} />
-        <Route path="/profile" element={<Profile/>} />
-        {/* <Route
+        {/* <Route path="/profile" element={<Profile/>} /> */}
+        <Route
               path="/profile"
               element={
                 <PrivateRoute redirectTo="/profile">
                   <Profile/>
                 </PrivateRoute>
               }
-            /> */}
+            />
       </Routes>
     </div>
   );
