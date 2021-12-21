@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react';
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios';
-import '../Styles/Profile.css'
 
 const StyledProfile = styled.div`
     * {
@@ -45,16 +45,15 @@ const StyledProfile = styled.div`
         padding: 7px;
     }
 `
-export default function Profile() {
-
-    const [user, setuser] = useState();
-
-    const [plants, setplants] = useState();
+export default function Profile(props) {
+    const [user, setUser] = useState();
+    const [plants, setPlants] = useState();
+    const {user_id} = useParams()
     // WIP get specific logged in user to render their profile
     useEffect (() => {
         axios.get(`https://watermyplantz.herokuapp.com/api/users/${user_id}`)
         .then(response => {
-        userCard.appendChild(profileCardMaker(response.data))
+        setUser(response.data)
         console.log(response.data)
         })
         .catch(error => {
@@ -63,38 +62,35 @@ export default function Profile() {
         .finally(() => console.log("WOOOOOHOOOO I WORK!"))
     })
     // WIP get user's plants and render to list
-    useEffect (() =>{
-        
-        plants.forEach(Plant =>{
-            axios.get(`https://watermyplantz.herokuapp.com/api/plants`)
-            .then(res => {
-            document.querySelector('.cards').append(profileCardMaker(response.data))}
-            )
-        })
-    })
+    useEffect(() => {
+        axios.get(`https://watermyplantz.herokuapp.com/api/users/${user_id}/plants`)
+            .then(response => {
+                console.log(response.data)
+                setPlants(response.data)
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
+
+    if (!Profile) {
+        return <div>Loading profile information...</div>;
+        }
+
+        const { name, username, email, userPlants} = Profile;
 
     return (
         <StyledProfile>
             <div className='profile-card'>
                 <div className='title-container'>
-                    <img
-                        class="round"
-                        src={response.data.img}
-                        alt="user"
-                    />
-                    <h3>{data.name}</h3>
-                    <h6>{data.username}</h6>
-                <div class="plants">
-                    {
-                        !!data.plants && !!data.plants.length &&
-                        <div>
-                            <h6>Plants:</h6>
-                            <ul>
-                            {data.plants.map((plant, idx) => <li key={idx}>{plant}</li>)}    
-                            </ul> 
-                        </div>       
-                }
-                        </div>
+                    <h3>{name}</h3>
+                    <h6>{username}</h6>
+                    <h6>{email}</h6>
+                {plants.map(plant => (
+                    <div key={plant} className="plants">
+                        {plant}
+                    </div>
+                ))}
                 </div>
             </div>
         </StyledProfile>

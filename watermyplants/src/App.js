@@ -4,7 +4,7 @@ import './App.css';
 import Signup from './components/Signup'
 import Login from './components/Login'
 import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-// import Profile from './components/Profile'
+import Profile from './components/Profile'
 
 const StyledHeader = styled.div`
     .header-container {
@@ -69,7 +69,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route path="/Login" component={Login} />
           <Route path="/Signup" component={Signup} />
-          {/* <Route path="/profile" component={Profile} /> */}
+          <Route path="/profile" component={Profile} />
         </Switch>
       </Router>
     </div>
