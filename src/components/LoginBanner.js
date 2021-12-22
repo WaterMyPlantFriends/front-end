@@ -4,30 +4,30 @@ const StyledDiv = styled.div`
     margin: 0 auto;
     position: relative;
     img {
-        height: 150px;
+        height: 175px;
         width: 90vw;
         opacity: 0.7;
         object-fit: cover;
         border-radius: 7px;
     }
-    .banner-text p{
+    .login-text p{
         position: absolute;
         font-size: 1.8rem;
         font-style: italic;
         top: 30%;
-        left: 60%;
+        left: 65%;
         transform: translate(-50%, -50%);
         color: '#003829';
         background-color: '#60ffd5';
     }
 `
-export default function HomeBanner(){
+export default function LoginBanner(){
     return (
         <StyledDiv>
-            <img src='../../images/gallery/fulls/04.jpg' alt='pale blue banner' />
+            <img src='../../images/gallery/thumbs/04.jpg' alt='plants' />
 
-            <div className='banner-text'>
-                <p>Never forget when it's time to quench your plant's thirst again</p>
+            <div className='login-text'>
+                <p>lorem lentils red amazon pepper muffins apple green</p>
             </div>
         </StyledDiv>
     )

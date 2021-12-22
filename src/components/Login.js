@@ -4,6 +4,7 @@ import styled from "styled-components";
 import * as yup from "yup";
 import loginSchema from "../validation/loginSchema";
 import { useNavigate } from "react-router";
+import LoginBanner from './LoginBanner';
 
 const initialFormValues = {
   username: "",
@@ -78,6 +79,8 @@ export default function Login(props) {
 
   // return Login element
   return (
+    <>
+    <LoginBanner />
     <StyledForm onSubmit={onSubmit}>
       <h2>Login</h2>
       <div className="errors">
@@ -117,6 +120,7 @@ export default function Login(props) {
         </button>
       </div>
     </StyledForm>
+    </>
   );
 }
 
@@ -138,7 +142,7 @@ const StyledForm = styled.form`
         width: 100%;
     }
     .errors {
-        color: '#f8f8ff';
+        color: '#8B0000';
     }
     .username {
         width: 90%;
