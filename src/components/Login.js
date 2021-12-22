@@ -130,6 +130,7 @@ const StyledForm = styled.form`
     box-sizing: border-box;
     margin: 0 auto;
     padding: 2%; 5%;
+    background-image: url('../../images/gallery/fulls/10.jpg');
     background-color: '#006e51';
     color: '#313639';
     border-style: double;
@@ -143,6 +144,7 @@ const StyledForm = styled.form`
     }
     .errors {
         color: '#8B0000';
+        padding: 1%;
     }
     .username {
         width: 90%;
