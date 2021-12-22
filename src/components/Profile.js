@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import axiosWithAuth from "../utilities/axiosWithAuth";
@@ -6,9 +7,7 @@ import Plant from './Plant'
 
 export default function Profile() {
   const [user, setUser] = useState(null);
-  // const uid = localStorage.getItem("uid");
   const [plants, setPlants] = useState(null);
-  // WIP get specific logged in user to render their profile
 
   let user_id = 1;
   useEffect(() => {
@@ -43,19 +42,20 @@ export default function Profile() {
       <div className="profile-card">
         <div className="title-container">
           <h1>Profile</h1>
-          <p>ID: {user.user_id}</p>
-          <p>Username: {user.username}</p>
-          <p>Email: {user.email}</p>
-          <p>Phone: {user.phone}</p>
+          <h3>ID: {user.user_id}</h3>
+          <h4>Username: {user.username}</h4>
+          <h4>Email: {user.email}</h4>
+          <h4>Phone: {user.phone}</h4>
           {plants && plants.map((plant) => (
-            <Plant
-              id={plant.plant_id}
-              nickname={plant.nickname}
-              species={plant.species}
-              h2oFrequency={plant.h2o_frequency}
-              image={plant.image_url}
-          />
+            <div key={plant.plant_id} className="plants">
+              <h5>{plant.nickname}</h5>
+            </div>
           ))}
+            <div className='button-container'>
+              <Link to="/profile">
+                <button id="profile">EDIT PROFILE</button>
+              </Link>
+            </div>
         </div>
       </div>
     </StyledProfile>
@@ -68,7 +68,6 @@ const StyledProfile = styled.div`
   }
   body {
     background-color: #28223f;
-    font-family: Montserrat, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,20 +86,37 @@ const StyledProfile = styled.div`
     font-size: 14px;
     line-height: 21px;
   }
-  .card-container {
-    background-color: #231e39;
+  .profile-card {
+    margin-top: 75px;
+    Margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(24, 191, 85);
     border-radius: 5px;
     box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
-    color: #b3b8cd;
-    padding-top: 30px;
-    position: relative;
     width: 350px;
     max-width: 100%;
     text-align: center;
   }
-  .card-container .round {
-    border: 1px solid #03bfcb;
-    border-radius: 50%;
-    padding: 7px;
+  .title-container {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .button-container {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  button {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    height: 2em;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  button:hover {
+    background-color: #000;
+    border: 1px solid #000;
+    color: white;
   }
 `;

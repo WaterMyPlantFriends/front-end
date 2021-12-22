@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import '../Styles/Header.css'
 export default function Header() {
   return (
     <StyledHeader>
