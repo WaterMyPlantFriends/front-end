@@ -8,6 +8,7 @@ const StyledDiv = styled.div`
     flex-wrap: wrap;
     margin: 0 auto;
     padding: 0;
+    background-image: url('../../images/gallery/fulls/01.jpg');
     img{
         margin: 0 auto;
         border-radius: 7px;
