@@ -26,7 +26,7 @@ const AddPlant = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/user/1/plants", {
+      .post("/users/1/plants", {
         nickname,
         species,
         h2oFrequency,
