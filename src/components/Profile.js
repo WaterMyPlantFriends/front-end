@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import axiosWithAuth from "../utilities/axiosWithAuth";
+import Plant from './Plant'
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -20,16 +21,18 @@ export default function Profile() {
       .catch((err) => console.log(err));
   }, []);
 
+
   useEffect(() => {
     axiosWithAuth()
       .get(`/users/${user_id}/plants`)
       .then((response) => {
-        console.log(response.data);
         setPlants(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
+
   }, []);
 
   if (!user) {
@@ -45,9 +48,13 @@ export default function Profile() {
           <p>Email: {user.email}</p>
           <p>Phone: {user.phone}</p>
           {plants && plants.map((plant) => (
-            <div key={plant.plant_id} className="plants">
-              <p>{plant.nickname}</p>
-            </div>
+            <Plant
+              id={plant.plant_id}
+              nickname={plant.nickname}
+              species={plant.species}
+              h2oFrequency={plant.h2o_frequency}
+              image={plant.image_url}
+          />
           ))}
         </div>
       </div>
