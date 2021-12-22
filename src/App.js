@@ -6,24 +6,33 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
+import AddPlant from "./components/AddPlant";
 
 function App() {
   return (
     <div className="App">
-      <Header/>
+      <Header />
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         {/* <Route path="/profile" element={<Profile/>} /> */}
         <Route
-              path="/profile"
-              element={
-                <PrivateRoute redirectTo="/profile">
-                  <Profile/>
-                </PrivateRoute>
-              }
-            />
+          path="/profile"
+          element={
+            <PrivateRoute redirectTo="/profile">
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/addplant"
+          element={
+            <PrivateRoute redirectTo="/addplant">
+              <AddPlant />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   );

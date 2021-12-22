@@ -4,6 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import axiosWithAuth from "../utilities/axiosWithAuth";
 import Plant from './Plant'
+import AddPlant from "./AddPlant";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -54,7 +55,15 @@ export default function Profile() {
             <div className='button-container'>
               <Link to="/profile">
                 <button id="profile">EDIT PROFILE</button>
+                <div>
+                <Link to="/addplant">
+                <button id="addplant">Add Plant</button>
               </Link>
+              <button>Delete Plant</button>
+
+                </div>
+              </Link>
+             
             </div>
         </div>
       </div>
