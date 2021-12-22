@@ -8,6 +8,8 @@ import InputMask from 'react-input-mask';
 import SignUpBanner from './SignUpBanner';
 
 const Container = styled.div`
+  background-image: url('../../images/gallery/fulls/05.jpg');
+  padding-bottom: 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
