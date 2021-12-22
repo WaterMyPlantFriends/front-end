@@ -5,6 +5,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import signUpSchema from '../validation/signUpSchema';
 import InputMask from 'react-input-mask';
+import SignUpBanner from './SignUpBanner';
 
 const Container = styled.div`
   display: flex;
@@ -105,6 +106,8 @@ export default function SignUp() {
   };
 
   return (
+    <>
+    <SignUpBanner />
     <Container>
       <h1>Sign Up</h1>
       <Form
@@ -192,5 +195,6 @@ export default function SignUp() {
         </SubmitButton>
       </Form>
     </Container>
+    </>
   );
 }
