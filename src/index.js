@@ -9,7 +9,7 @@ import reducer from './reducers/index';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk, logger));
 console.log(store.getState())
 
 ReactDOM.render(
