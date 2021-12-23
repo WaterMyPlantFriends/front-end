@@ -49,7 +49,6 @@ const Profile = (props)=> {
 
   const handleAddPlantStart = (e) => {
     e.preventDefault();
-    console.log('click')
     props.addPlantStart();
     return
   }

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Plant from './Plant';
+import { connect } from 'react-redux';
+import { getPlants } from '../actions/plantActions';
 
 const StyledDiv = styled.div`
     box-sizing: border-box;
@@ -13,39 +15,48 @@ const StyledDiv = styled.div`
     padding: 1% 3%;
 `
 
-export default function PlantDisplay(props){
+const mapStateToProps = (state) => {
+    return({
+        plants: state.plantReducer.plants
+    })
+  }
+
+const PlantDisplay = (props) => {
+    useEffect(()=>{
+        props.getPlants()
+    }, [])
     
-    const [plants, setPlants] = useState([]);
-    // get plants by user id
-    // const getPlants = (userId) => {
-    //     axios.get(`https://watermyplantz.herokuapp.com/api/users/${userId}/plants`)
+    // const [plants, setPlants] = useState([]);
+    // // get plants by user id
+    // // const getPlants = (userId) => {
+    // //     axios.get(`https://watermyplantz.herokuapp.com/api/users/${userId}/plants`)
+    // //         .then(resp => {
+    // //             console.log(resp);
+    // //             // setPlants here
+    // //         })
+    // //         .catch(err => {
+    // //             console.error(err);
+    // //         })
+    // // }
+    // // get all plants
+    // const getPlants = () => {
+    //     axios.get('https://watermyplantz.herokuapp.com/api/plants')
     //         .then(resp => {
-    //             console.log(resp);
-    //             // setPlants here
+    //             setPlants(resp.data);
+    //             console.log(resp.data)
     //         })
     //         .catch(err => {
     //             console.error(err);
     //         })
     // }
-    // get all plants
-    const getPlants = () => {
-        axios.get('https://watermyplantz.herokuapp.com/api/plants')
-            .then(resp => {
-                setPlants(resp.data);
-                console.log(resp.data)
-            })
-            .catch(err => {
-                console.error(err);
-            })
-    }
-    useEffect(() => {
-        getPlants(0);
-    }, []);
-    if (!plants) return <h3>Please login.</h3>
+    // useEffect(() => {
+    //     getPlants();
+    // }, []);
+    if (!props.plants) return <h3>Please login.</h3>
     return (
         <StyledDiv className='plantDisplay container'>
             {
-                plants.filter(p => p.user_id === null).map(plant => {
+                props.plants.filter(p => p.user_id === null).map(plant => {
                     return(
                         <Plant
                             id={plant.plant_id}
@@ -60,3 +71,5 @@ export default function PlantDisplay(props){
         </StyledDiv>
     )
 }
+
+export default connect (mapStateToProps, {getPlants}) (PlantDisplay);

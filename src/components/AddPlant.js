@@ -27,10 +27,10 @@ const AddPlant = () => {
     e.preventDefault();
     axiosWithAuth()
       .post("/users/1/plants", {
-        nickname,
-        species,
-        h2oFrequency,
-        image,
+        nickname: nickname,
+        species: species,
+        h2oFrequency: h2oFrequency,
+        image: image,
         user_id: 1,
       })
       .then((resp) => {
