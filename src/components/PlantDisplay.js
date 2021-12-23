@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Plant from './Plant';
+import { connect } from 'react-redux';
 
 const StyledDiv = styled.div`
     box-sizing: border-box;
@@ -13,7 +14,11 @@ const StyledDiv = styled.div`
     padding: 1% 3%;
 `
 
-export default function PlantDisplay(props){
+const mapStateToProps = (state) => {
+    return({})
+  }
+
+const PlantDisplay = (props) => {
     
     const [plants, setPlants] = useState([]);
     // get plants by user id
@@ -60,3 +65,5 @@ export default function PlantDisplay(props){
         </StyledDiv>
     )
 }
+
+export default connect (mapStateToProps) (PlantDisplay);

@@ -40,7 +40,7 @@ const Plant = (props) => {
     } = props;
 
     const handleDelete = () => {
-        console.log('click')
+        console.log('delete plant')
         return
     }
 
