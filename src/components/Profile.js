@@ -6,6 +6,7 @@ import axiosWithAuth from "../utilities/axiosWithAuth";
 import reducer from '../reducers/index';
 import { connect } from 'react-redux';
 import { addPlantStart } from '../actions/plantActions';
+import AddPlant from './AddPlant'
 
 const mapStateToProps = (state) => {
   return({
@@ -73,7 +74,35 @@ const Profile = (props)=> {
   }
   else {
     return (
-      <div></div>
+      <div>
+        <StyledProfile>
+          <div className="profile-card">
+            <div className="title-container">
+              <h1>Profile</h1>
+              <h3>ID: {user.user_id}</h3>
+              <h4>Username: {user.username}</h4>
+              <h4>Email: {user.email}</h4>
+              <h4>Phone: {user.phone}</h4>
+              {plants && plants.map((plant) => (
+                <div key={plant.plant_id} className="plants">
+                  <h5>{plant.nickname}</h5>
+                </div>
+              ))}
+                <div className='button-container'>
+                  <Link to="/profile">
+                    <button id="profile">EDIT PROFILE</button>
+                  </Link>
+                </div>
+                <div>
+                  <button id="addplant">ADD PLANT</button>
+                </div>
+            </div>
+          </div>
+        </StyledProfile>
+        <StyledProfile>
+          <AddPlant/>
+        </StyledProfile>
+      </div>
     )
   }
 }
