@@ -75,7 +75,7 @@ function Login({ dispatch }) {
 
   return (
     <StyledForm onSubmit={onSubmit}>
-      <h2>Login</h2>
+      <div className="login-wrapper">
       <div className="errors">
         {/* errors here */}
         <div>{formErrors.username}</div>
@@ -84,33 +84,35 @@ function Login({ dispatch }) {
       </div>
       {/* Form */}
       <div className="form-container">
+        <h2>Login</h2>
         <div className="username">
           <label>
-            <p>Username</p>
             <input
               id="username"
               value={formValues.username}
               onChange={onChange}
               name="username"
               type="text"
+              placeholder="username"
             />
           </label>
         </div>
         <div className="password">
           <label>
-            <p>Password</p>
             <input
               id="password"
               value={formValues.password}
               onChange={onChange}
               name="password"
               type="password"
+              placeholder="password"
             />
           </label>
         </div>
         <button type="submit" id="loginBtn" disabled={disabled}>
           Login
         </button>
+      </div>
       </div>
     </StyledForm>
   );
@@ -119,42 +121,49 @@ const mapStateToProps = (state) => ({ user_id: state.user_id });
 export default connect(mapStateToProps)(Login);
 
 const StyledForm = styled.form`
-    display: flex;
-    flex-wrap: wrap;
     box-sizing: border-box;
     margin: 0 auto;
     padding: 2%; 5%;
     background-color: '#006e51';
     color: '#313639';
-    border-style: double;
-    border-color: '#004f3a';
-    outline: 5px solid '#10ffbf';
+
+    .login-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
     h2 {
         color: '#afffea';
     }
     .form-container {
-        width: 100%;
+        width: 300px;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 10px grey;
+        margin-top: 3%;
     }
     .errors {
         color: '#f8f8ff';
     }
-    .username {
-        width: 90%;
-    }
     .username p {
         display: inline;
         margin-right: 1%;
-    }
-    .password {
-        width: 90%;
     }
     .password p {
         display: inline;
         margin-right: 1%;
     }
     #loginBtn {
-        width: 40%;
+        width: 100px;
         padding: 2%;
-        margin: 1% auto;
+        border: none;
+        margin: 2%;
+    }
+    button:hover {
+      background: lightgreen;
+      border: none;
     }
 `;
