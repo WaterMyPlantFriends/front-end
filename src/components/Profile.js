@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import axiosWithAuth from "../utilities/axiosWithAuth";
 import { connect } from 'react-redux';
-import { addPlantStart } from '../actions/plantActions';
+import { addPlant } from '../actions/plantActions';
 import AddPlant from './AddPlant';
 
 const mapStateToProps = (state) => {
@@ -49,7 +49,7 @@ const Profile = (props)=> {
 
   const handleAddPlantStart = (e) => {
     e.preventDefault();
-    props.addPlantStart();
+    props.addPlant();
     return
   }
 
@@ -112,7 +112,7 @@ const Profile = (props)=> {
   }
 }
 
-export default connect (mapStateToProps, {addPlantStart}) (Profile);
+export default connect (mapStateToProps, {addPlant}) (Profile);
 
 const StyledProfile = styled.div`
   * {

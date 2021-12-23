@@ -1,4 +1,4 @@
-import { ADD_PLANT_START } from '../actions/plantActions.js'
+import { ADD_PLANT } from '../actions/plantActions.js'
 import { DELETE_PLANT } from '../actions/plantActions.js'
 import { SET_PLANTS } from '../actions/plantActions.js'
 
@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 plants: action.payload
             }
-        case ADD_PLANT_START:
+        case ADD_PLANT:
             return {
                 ...state,
                 addingPlant: true

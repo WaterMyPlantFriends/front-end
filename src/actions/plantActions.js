@@ -1,6 +1,7 @@
 import axios from 'axios';
+import axiosWithAuth from '../utilities/axiosWithAuth';
 
-export const ADD_PLANT_START = "ADD_PLANT_START"
+export const ADD_PLANT = "ADD_PLANT"
 export const DELETE_PLANT = "DELETE_PLANT"
 export const GET_PLANTS = "GET_PLANTS"
 export const SET_PLANTS = "SET_PLANTS"
@@ -17,12 +18,18 @@ export const getPlants = () => {
     }
 }
 
+export function addPlantByUserId(user_id) {
+    return (dispatch) => {
+        
+    }
+}
+
 export const setPlants = (plants) => {
     return({type:SET_PLANTS, payload:plants})
 }
 
-export const addPlantStart = () => {
-    return({type: ADD_PLANT_START})
+export const addPlant = (plant) => {
+    return({type: ADD_PLANT, payload: plant})
 }
 
 export const deletePlant = (id) => {
