@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import axiosWithAuth from "../utilities/axiosWithAuth";
+import Plant from './Plant'
+import AddPlant from "./AddPlant";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -19,16 +21,18 @@ export default function Profile() {
       .catch((err) => console.log(err));
   }, []);
 
+
   useEffect(() => {
     axiosWithAuth()
       .get(`/users/${user_id}/plants`)
       .then((response) => {
-        console.log(response.data);
         setPlants(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
+
   }, []);
 
   if (!user) {
@@ -51,7 +55,15 @@ export default function Profile() {
             <div className='button-container'>
               <Link to="/profile">
                 <button id="profile">EDIT PROFILE</button>
+                <div>
+                <Link to="/addplant">
+                <button id="addplant">Add Plant</button>
               </Link>
+              <button>Delete Plant</button>
+
+                </div>
+              </Link>
+             
             </div>
         </div>
       </div>
