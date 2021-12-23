@@ -5,7 +5,6 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-    console.log('reducer')
     switch(action.type) {
         case ADD_PLANT_START:
             console.log('reducer')

@@ -105,7 +105,7 @@ const Profile = (props)=> {
           </div>
         </StyledProfile>
         <StyledProfile>
-          <AddPlant/>
+         <AddPlant/>
         </StyledProfile>
       </div>
     )
