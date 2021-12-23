@@ -1,38 +1,28 @@
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import axiosWithAuth from "../utilities/axiosWithAuth";
-// import axios from 'axios'
+import { connect } from "react-redux";
 import axiosWithAuth from "../utilities/axiosWithAuth";
 
+const plantTemplate = {
+  nickname: "",
+  species: "",
+  h2o_frequency: "",
+  uploaded_image: "",
+  user_id: 1
+}
+
 const AddPlant = () => {
-  const [nickname, setNickname] = useState("");
-  const [species, setSpecies] = useState("");
-  const [h2oFrequency, seth2oFrequency] = useState(null);
-  const [image, setImage] = useState("");
+  const [newPlant, setNewPlant] = useState(plantTemplate);
 
   const handleChange = (e) => {
     e.preventDefault();
-    if (e.target.name === "nickname") {
-      setNickname(e.target.value);
-    } else if (e.target.name === "species") {
-      setSpecies(e.target.value);
-    } else if (e.target.name === "h2oFrequency") {
-      seth2oFrequency(e.target.value);
-    } else if (e.target.name === "image") {
-      setImage(e.target.value);
-    }
+    const { name, value } = e.target;
+    setNewPlant({ ...newPlant, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/users/1/plants", {
-        nickname: nickname,
-        species: species,
-        h2oFrequency: h2oFrequency,
-        image: image,
-        user_id: 1,
-      })
+      .post("/plants", newPlant)
       .then((resp) => {
         console.log(resp);
       })
@@ -40,13 +30,6 @@ const AddPlant = () => {
         console.log(err);
       });
   };
-  // useEffect (() => {
-  //   console.log('nickname', nickname)
-  //   console.log('water', h2oFrequency)
-  //   console.log('species', species)
-  //   console.log('image', image)
-
-  // },[nickname, species, h2oFrequency, image])
 
   return (
     <div className='profile-card'>
@@ -60,16 +43,16 @@ const AddPlant = () => {
               id="user_id"
               text="text"
               name="nickname"
-              value={nickname}
+              value={newPlant.nickname}
               onChange={handleChange}
-              placeholder="nickname"
+              placeholder="Nickname"
             />
           </div>
           <div>
             <input
               text="text"
               name="species"
-              value={species}
+              value={newPlant.species}
               onChange={handleChange}
               placeholder="Species"
             />
@@ -77,20 +60,23 @@ const AddPlant = () => {
           <div>
             <input
               text="text"
-              name="h2oFrequency"
-              value={h2oFrequency}
+              name="h2o_frequency"
+              value={newPlant.h2o_frequency}
               onChange={handleChange}
               placeholder="Water Frequency"
             />
           </div>
           <div>
-            <input
-              text="text"
-              name="image"
-              value={image}
-              onChange={handleChange}
-              placeholder="Image (Optional)"
-            />
+            {/* <form> */}
+              <input
+                text="file"
+                accept="image/*"
+                name="uploaded_image"
+                value={newPlant.uploaded_image}
+                onChange={handleChange}
+              />
+              {/* <button>Add photo</button> */}
+            {/* </form> */}
           </div>
         </label>
         <button> Add </button>
@@ -99,4 +85,5 @@ const AddPlant = () => {
   );
 };
 
-export default AddPlant;
+const mapStateToProps = (state) => ({ plants: state.plants })
+export default connect(mapStateToProps)(AddPlant);

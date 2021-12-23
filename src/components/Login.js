@@ -4,6 +4,8 @@ import styled from "styled-components";
 import * as yup from "yup";
 import loginSchema from "../validation/loginSchema";
 import { useNavigate } from "react-router";
+import { connect } from "react-redux";
+import { setUserId } from "../actions/profileActions";
 
 const initialFormValues = {
   username: "",
@@ -16,7 +18,7 @@ const initialFormErrors = {
 };
 const initialDisabled = true;
 
-export default function Login(props) {
+function Login({ dispatch, user }) {
   const navigate = useNavigate();
   // state slices
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -58,6 +60,7 @@ export default function Login(props) {
       .then((resp) => {
         // we login successfully and get a token
         localStorage.setItem("token", resp.data.token);
+        dispatch(setUserId(resp.data.user_id))
         navigate("/profile");
       })
       .catch((err) => {
@@ -119,6 +122,8 @@ export default function Login(props) {
     </StyledForm>
   );
 }
+const mapStateToProps = (state) => ({ user_id: state.user_id })
+export default connect(mapStateToProps)(Login);
 
 const StyledForm = styled.form`
     display: flex;
