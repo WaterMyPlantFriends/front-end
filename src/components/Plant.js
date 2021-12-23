@@ -43,6 +43,10 @@ export default function Plant(props){
                 <div className='water-info'>
                     <p>Water me in {h2oFrequency} day(s)</p>
                 </div>
+                <div>
+                    <button>Delete</button>
+                    <button>Edit</button>
+                </div>
             </div>
         </StyledDiv>
     )
