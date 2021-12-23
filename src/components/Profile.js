@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import axiosWithAuth from "../utilities/axiosWithAuth";
-import reducer from '../reducers/index';
 import { connect } from 'react-redux';
 import { addPlantStart } from '../actions/plantActions';
-import AddPlant from './AddPlant'
+import AddPlant from './AddPlant';
 
 const mapStateToProps = (state) => {
   return({
@@ -15,6 +14,7 @@ const mapStateToProps = (state) => {
 }
 
 const Profile = (props)=> {
+  console.log(props);
   const [user, setUser] = useState(null);
   const [plants, setPlants] = useState(null);
 
@@ -44,6 +44,14 @@ const Profile = (props)=> {
   if (!user) {
     return <h1>Loading</h1>
   }
+
+  const handleAddPlantStart = (e) => {
+    e.preventDefault();
+    console.log('click')
+    props.addPlantStart();
+    return
+  }
+
   if (props.addingPlant === false) {
     return (
       <StyledProfile>
@@ -65,7 +73,7 @@ const Profile = (props)=> {
                 </Link>
               </div>
               <div>
-                <button id="addplant">ADD PLANT</button>
+                <button id="addplant" onClick={handleAddPlantStart}>ADD PLANT</button>
               </div>
           </div>
         </div>
@@ -92,9 +100,6 @@ const Profile = (props)=> {
                   <Link to="/profile">
                     <button id="profile">EDIT PROFILE</button>
                   </Link>
-                </div>
-                <div>
-                  <button id="addplant">ADD PLANT</button>
                 </div>
             </div>
           </div>
