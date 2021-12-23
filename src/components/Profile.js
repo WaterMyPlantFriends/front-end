@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
   })
 }
 
-const Profile = ()=> {
+const Profile = (props)=> {
   const [user, setUser] = useState(null);
   const [plants, setPlants] = useState(null);
 
@@ -43,32 +43,39 @@ const Profile = ()=> {
   if (!user) {
     return <h1>Loading</h1>
   }
-  return (
-    <StyledProfile>
-      <div className="profile-card">
-        <div className="title-container">
-          <h1>Profile</h1>
-          <h3>ID: {user.user_id}</h3>
-          <h4>Username: {user.username}</h4>
-          <h4>Email: {user.email}</h4>
-          <h4>Phone: {user.phone}</h4>
-          {plants && plants.map((plant) => (
-            <div key={plant.plant_id} className="plants">
-              <h5>{plant.nickname}</h5>
-            </div>
-          ))}
-            <div className='button-container'>
-              <Link to="/profile">
-                <button id="profile">EDIT PROFILE</button>
-              </Link>
-            </div>
-            <div>
-              <button id="addplant">ADD PLANT</button>
-            </div>
+  if (props.addingPlant === false) {
+    return (
+      <StyledProfile>
+        <div className="profile-card">
+          <div className="title-container">
+            <h1>Profile</h1>
+            <h3>ID: {user.user_id}</h3>
+            <h4>Username: {user.username}</h4>
+            <h4>Email: {user.email}</h4>
+            <h4>Phone: {user.phone}</h4>
+            {plants && plants.map((plant) => (
+              <div key={plant.plant_id} className="plants">
+                <h5>{plant.nickname}</h5>
+              </div>
+            ))}
+              <div className='button-container'>
+                <Link to="/profile">
+                  <button id="profile">EDIT PROFILE</button>
+                </Link>
+              </div>
+              <div>
+                <button id="addplant">ADD PLANT</button>
+              </div>
+          </div>
         </div>
-      </div>
-    </StyledProfile>
-  );
+      </StyledProfile>
+    )
+  }
+  else {
+    return (
+      <div></div>
+    )
+  }
 }
 
 export default connect (mapStateToProps, {addPlantStart}) (Profile);
