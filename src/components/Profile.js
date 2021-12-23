@@ -6,7 +6,6 @@ import axiosWithAuth from "../utilities/axiosWithAuth";
 import { connect } from 'react-redux';
 import { addPlantStart } from '../actions/plantActions';
 import AddPlant from './AddPlant';
-import AddPlant from "./AddPlant";
 
 const mapStateToProps = (state) => {
   return({
@@ -79,7 +78,9 @@ const Profile = (props)=> {
                 <button id="addplant" onClick={handleAddPlantStart}>ADD PLANT</button>
               </div>
           </div>
-  }
+        </div>
+      </StyledProfile>
+    )}
   else {
     return (
       <div>
