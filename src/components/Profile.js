@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import axiosWithAuth from "../utilities/axiosWithAuth";
+import reducer from '../reducers/index';
 import { connect } from 'react-redux';
 import { addPlantStart } from '../actions/plantActions';
 
 const mapStateToProps = (state) => {
   return({
-    
+    addingPlant: state.plantReducer.addingPlant
   })
 }
 

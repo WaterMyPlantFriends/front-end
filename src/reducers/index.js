@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 
 import profileReducer from './profileReducer';
-import plantProfile from './plantReducer';
+import plantReducer from './plantReducer';
 
-const rootReducer = combineReducers({profileReducer, plantProfile})
+const rootReducer = combineReducers({profileReducer, plantReducer})
 
 export default rootReducer;
