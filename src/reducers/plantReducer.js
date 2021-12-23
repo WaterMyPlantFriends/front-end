@@ -20,8 +20,12 @@ const reducer = (state = initialState, action) => {
                 addingPlant: true
             }
         case DELETE_PLANT:
+            console.log(state.plants)
             return{
-                ...state
+                ...state,
+                plants: state.plants.filter(function(plant) {
+                    return plant.plant_id !== action.payload
+                })
             }
         default:
             return state;

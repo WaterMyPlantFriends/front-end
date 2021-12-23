@@ -22,7 +22,10 @@ const mapStateToProps = (state) => {
   }
 
 const PlantDisplay = (props) => {
-    props.getPlants()
+    useEffect(()=>{
+        props.getPlants()
+    }, [])
+    
     // const [plants, setPlants] = useState([]);
     // // get plants by user id
     // // const getPlants = (userId) => {

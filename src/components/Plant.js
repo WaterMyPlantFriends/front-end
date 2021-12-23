@@ -39,8 +39,10 @@ const Plant = (props) => {
         image, //optional
     } = props;
 
-    const handleDelete = () => {
-        console.log('delete plant')
+    const handleDelete = (e) => {
+        e.preventDefault()
+        console.log(id)
+        props.deletePlant(id)
         return
     }
 

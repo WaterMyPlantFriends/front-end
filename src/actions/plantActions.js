@@ -25,6 +25,6 @@ export const addPlantStart = () => {
     return({type: ADD_PLANT_START})
 }
 
-export const deletePlant = () => {
-    return({type:DELETE_PLANT})
+export const deletePlant = (id) => {
+    return({type:DELETE_PLANT, payload:id})
 }
