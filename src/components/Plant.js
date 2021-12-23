@@ -1,5 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+    return({
+        
+    })
+  }
 
 const StyledDiv = styled.div`
     box-sizing: border-box;
@@ -22,7 +29,7 @@ const StyledDiv = styled.div`
     }
 `
 
-export default function Plant(props){
+const Plant = (props) => {
     // Plant must have these properties:
     const {
         // destructuring
@@ -51,3 +58,5 @@ export default function Plant(props){
         </StyledDiv>
     )
 }
+
+export default connect (mapStateToProps) (Plant);
