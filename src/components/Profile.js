@@ -3,32 +3,26 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import axiosWithAuth from "../utilities/axiosWithAuth";
-import { connect } from 'react-redux';
-import { addPlant } from '../actions/plantActions';
-import AddPlant from './AddPlant';
+import { connect } from "react-redux";
+import { addPlant } from "../actions/plantActions";
+import AddPlant from "./AddPlant";
+import { BASE_URL } from "../constants";
 
-const mapStateToProps = (state) => {
-  return({
-    addingPlant: state.plantReducer.addingPlant
-  })
-}
-
-const Profile = (props)=> {
-  console.log(props);
+const Profile = (props) => {
   const [user, setUser] = useState(null);
   const [plants, setPlants] = useState(null);
 
+  // User ID should be dynamic and be assigned to whoever is logged in
   let user_id = 1;
   useEffect(() => {
     axios
-      .get(`https://watermyplantz.herokuapp.com/api/users/${user_id}`)
+      .get(`${BASE_URL}/users/${user_id}`)
       .then((res) => {
         setUser(res.data);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
-
 
   useEffect(() => {
     axiosWithAuth()
@@ -40,18 +34,17 @@ const Profile = (props)=> {
       .catch((error) => {
         console.error(error);
       });
-
   }, []);
 
   if (!user) {
-    return <h1>Loading</h1>
+    return <h1>Loading</h1>;
   }
 
   const handleAddPlantStart = (e) => {
     e.preventDefault();
     props.addPlant();
-    return
-  }
+    return;
+  };
 
   if (props.addingPlant === false) {
     return (
@@ -63,24 +56,27 @@ const Profile = (props)=> {
             <h4>Username: {user.username}</h4>
             <h4>Email: {user.email}</h4>
             <h4>Phone: {user.phone}</h4>
-            {plants && plants.map((plant) => (
-              <div key={plant.plant_id} className="plants">
-                <h5>{plant.nickname}</h5>
-              </div>
-            ))}
-              <div className='button-container'>
-                <Link to="/profile">
-                  <button id="profile">EDIT PROFILE</button>
-                </Link>
-              </div>
-              <div>
-                <button id="addplant" onClick={handleAddPlantStart}>ADD PLANT</button>
-              </div>
+            {plants &&
+              plants.map((plant) => (
+                <div key={plant.plant_id} className="plants">
+                  <h5>{plant.nickname}</h5>
+                </div>
+              ))}
+            <div className="button-container">
+              <Link to="/profile">
+                <button id="profile">EDIT PROFILE</button>
+              </Link>
+            </div>
+            <div>
+              <button id="addplant" onClick={handleAddPlantStart}>
+                ADD PLANT
+              </button>
+            </div>
           </div>
         </div>
       </StyledProfile>
-    )}
-  else {
+    );
+  } else {
     return (
       <div>
         <StyledProfile>
@@ -91,28 +87,29 @@ const Profile = (props)=> {
               <h4>Username: {user.username}</h4>
               <h4>Email: {user.email}</h4>
               <h4>Phone: {user.phone}</h4>
-              {plants && plants.map((plant) => (
-                <div key={plant.plant_id} className="plants">
-                  <h5>{plant.nickname}</h5>
-                </div>
-              ))}
-                <div className='button-container'>
-                  <Link to="/profile">
-                    <button id="profile">EDIT PROFILE</button>
-                  </Link>
-                </div>
+              {plants &&
+                plants.map((plant) => (
+                  <div key={plant.plant_id} className="plants">
+                    <h5>{plant.nickname}</h5>
+                  </div>
+                ))}
+              <div className="button-container">
+                <Link to="/profile">
+                  <button id="profile">EDIT PROFILE</button>
+                </Link>
+              </div>
             </div>
           </div>
         </StyledProfile>
         <StyledProfile>
-         <AddPlant/>
+          <AddPlant />
         </StyledProfile>
       </div>
-    )
+    );
   }
-}
-
-export default connect (mapStateToProps, {addPlant}) (Profile);
+};
+const mapStateToProps = (state) => ({addingPlant: state.plantReducer.addingPlant})
+export default connect(mapStateToProps, { addPlant })(Profile);
 
 const StyledProfile = styled.div`
   * {
@@ -140,7 +137,7 @@ const StyledProfile = styled.div`
   }
   .profile-card {
     margin-top: 75px;
-    Margin-left: auto;
+    margin-left: auto;
     margin-right: auto;
     background-color: rgb(24, 191, 85);
     border-radius: 5px;

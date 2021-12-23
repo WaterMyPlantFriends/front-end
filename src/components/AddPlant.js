@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import axiosWithAuth from "../utilities/axiosWithAuth";
 
@@ -67,6 +67,7 @@ const AddPlant = () => {
             />
           </div>
           <div>
+            {/* Configure image uploading */}
             {/* <form> */}
               <input
                 text="file"

@@ -6,6 +6,7 @@ import loginSchema from "../validation/loginSchema";
 import { useNavigate } from "react-router";
 import { connect } from "react-redux";
 import { setUserId } from "../actions/profileActions";
+import { BASE_URL } from "../constants";
 
 const initialFormValues = {
   username: "",
@@ -18,15 +19,14 @@ const initialFormErrors = {
 };
 const initialDisabled = true;
 
-function Login({ dispatch, user }) {
+function Login({ dispatch }) {
   const navigate = useNavigate();
-  // state slices
+
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
-  // functions
+
   const validate = (name, value) => {
-    // validate with yup
     yup
       .reach(loginSchema, name)
       .validate(value)
@@ -35,51 +35,44 @@ function Login({ dispatch, user }) {
   };
   const onChange = (evt) => {
     const { name, value } = evt.target;
-    // validate
     validate(name, value);
-    // update formValues
     setFormValues({
       ...formValues,
       [name]: value,
     });
   };
   const onSubmit = (evt) => {
-    // construct loginAttempt
     evt.preventDefault();
     const loginAttempt = {
       username: formValues.username.trim(),
       password: formValues.password.trim(),
     };
-    // POST login attempt
     postLogin(loginAttempt);
   };
   const postLogin = (loginAttempt) => {
-    console.log(loginAttempt)
+    console.log(loginAttempt);
     axios
-      .post("https://watermyplantz.herokuapp.com/api/auth/login", loginAttempt)
+      .post(`${BASE_URL}/auth/login`, loginAttempt)
       .then((resp) => {
-        // we login successfully and get a token
         localStorage.setItem("token", resp.data.token);
-        dispatch(setUserId(resp.data.user_id))
+        dispatch(setUserId(resp.data.user_id));
         navigate("/profile");
       })
       .catch((err) => {
-        // we failed to login
         console.error(err);
         const loginError = {
           ...formErrors,
           loginAttempt: "Login failed. Please try again.",
         };
-        setFormErrors(loginError); 
+        setFormErrors(loginError);
       })
       .finally(() => setFormValues(initialFormValues));
   };
-  // update login button when formValues change
+
   useEffect(() => {
     loginSchema.isValid(formValues).then((valid) => setDisabled(!valid));
   }, [formValues]);
 
-  // return Login element
   return (
     <StyledForm onSubmit={onSubmit}>
       <h2>Login</h2>
@@ -122,7 +115,7 @@ function Login({ dispatch, user }) {
     </StyledForm>
   );
 }
-const mapStateToProps = (state) => ({ user_id: state.user_id })
+const mapStateToProps = (state) => ({ user_id: state.user_id });
 export default connect(mapStateToProps)(Login);
 
 const StyledForm = styled.form`
