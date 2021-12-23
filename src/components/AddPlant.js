@@ -49,7 +49,7 @@ const AddPlant = () => {
   // },[nickname, species, h2oFrequency, image])
 
   return (
-    <div>
+    <div className='profile-card'>
       <h1>Add Plant</h1>
 
       <form onSubmit={handleSubmit}>

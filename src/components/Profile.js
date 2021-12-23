@@ -3,10 +3,18 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import axiosWithAuth from "../utilities/axiosWithAuth";
-import Plant from './Plant'
-import AddPlant from "./AddPlant";
+import { connect } from 'react-redux';
+import { addPlantStart } from '../actions/plantActions';
+import AddPlant from './AddPlant';
 
-export default function Profile() {
+const mapStateToProps = (state) => {
+  return({
+    addingPlant: state.plantReducer.addingPlant
+  })
+}
+
+const Profile = (props)=> {
+  console.log(props);
   const [user, setUser] = useState(null);
   const [plants, setPlants] = useState(null);
 
@@ -38,38 +46,74 @@ export default function Profile() {
   if (!user) {
     return <h1>Loading</h1>
   }
-  return (
-    <StyledProfile>
-      <div className="profile-card">
-        <div className="title-container">
-          <h1>Profile</h1>
-          <h3>ID: {user.user_id}</h3>
-          <h4>Username: {user.username}</h4>
-          <h4>Email: {user.email}</h4>
-          <h4>Phone: {user.phone}</h4>
-          {plants && plants.map((plant) => (
-            <div key={plant.plant_id} className="plants">
-              <h5>{plant.nickname}</h5>
-            </div>
-          ))}
-            <div className='button-container'>
-              <Link to="/profile">
-                <button id="profile">EDIT PROFILE</button>
-                <div>
-                <Link to="/addplant">
-                <button id="addplant">Add Plant</button>
-              </Link>
-              <button>Delete Plant</button>
 
-                </div>
-              </Link>
-             
-            </div>
+  const handleAddPlantStart = (e) => {
+    e.preventDefault();
+    console.log('click')
+    props.addPlantStart();
+    return
+  }
+
+  if (props.addingPlant === false) {
+    return (
+      <StyledProfile>
+        <div className="profile-card">
+          <div className="title-container">
+            <h1>Profile</h1>
+            <h3>ID: {user.user_id}</h3>
+            <h4>Username: {user.username}</h4>
+            <h4>Email: {user.email}</h4>
+            <h4>Phone: {user.phone}</h4>
+            {plants && plants.map((plant) => (
+              <div key={plant.plant_id} className="plants">
+                <h5>{plant.nickname}</h5>
+              </div>
+            ))}
+              <div className='button-container'>
+                <Link to="/profile">
+                  <button id="profile">EDIT PROFILE</button>
+                </Link>
+              </div>
+              <div>
+                <button id="addplant" onClick={handleAddPlantStart}>ADD PLANT</button>
+              </div>
+          </div>
         </div>
+      </StyledProfile>
+    )}
+  else {
+    return (
+      <div>
+        <StyledProfile>
+          <div className="profile-card">
+            <div className="title-container">
+              <h1>Profile</h1>
+              <h3>ID: {user.user_id}</h3>
+              <h4>Username: {user.username}</h4>
+              <h4>Email: {user.email}</h4>
+              <h4>Phone: {user.phone}</h4>
+              {plants && plants.map((plant) => (
+                <div key={plant.plant_id} className="plants">
+                  <h5>{plant.nickname}</h5>
+                </div>
+              ))}
+                <div className='button-container'>
+                  <Link to="/profile">
+                    <button id="profile">EDIT PROFILE</button>
+                  </Link>
+                </div>
+            </div>
+          </div>
+        </StyledProfile>
+        <StyledProfile>
+         <AddPlant/>
+        </StyledProfile>
       </div>
-    </StyledProfile>
-  );
+    )
+  }
 }
+
+export default connect (mapStateToProps, {addPlantStart}) (Profile);
 
 const StyledProfile = styled.div`
   * {
