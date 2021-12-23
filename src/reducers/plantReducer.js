@@ -1,4 +1,5 @@
 import { ADD_PLANT_START } from '../actions/plantActions.js'
+import { DELETE_PLANT } from '../actions/plantActions.js'
 
 const initialState = {
     addingPlant: false,
@@ -7,10 +8,13 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_PLANT_START:
-            console.log('reducer')
             return {
                 ...state,
                 addingPlant: true
+            }
+        case DELETE_PLANT:
+            return{
+                ...state
             }
         default:
             return state;

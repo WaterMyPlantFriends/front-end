@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { deletePlant } from '../actions/plantActions';
 
 const mapStateToProps = (state) => {
-    return({
-        
-    })
+    return({})
   }
 
 const StyledDiv = styled.div`
@@ -39,6 +38,12 @@ const Plant = (props) => {
         h2oFrequency,
         image, //optional
     } = props;
+
+    const handleDelete = () => {
+        console.log('click')
+        return
+    }
+
     return (
         <StyledDiv className='plant container' id={id}>
             {
@@ -51,7 +56,7 @@ const Plant = (props) => {
                     <p>Water me in {h2oFrequency} day(s)</p>
                 </div>
                 <div>
-                    <button>Delete</button>
+                    <button onClick={handleDelete}>Delete</button>
                     <button>Edit</button>
                 </div>
             </div>
@@ -59,4 +64,4 @@ const Plant = (props) => {
     )
 }
 
-export default connect (mapStateToProps) (Plant);
+export default connect (mapStateToProps, { deletePlant }) (Plant);
