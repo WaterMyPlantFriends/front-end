@@ -3,8 +3,16 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import axiosWithAuth from "../utilities/axiosWithAuth";
+import { connect } from 'react-redux';
+import { addPlantStart } from '../actions/plantActions';
 
-export default function Profile() {
+const mapStateToProps = (state) => {
+  return({
+    
+  })
+}
+
+const Profile = ()=> {
   const [user, setUser] = useState(null);
   const [plants, setPlants] = useState(null);
 
@@ -61,6 +69,8 @@ export default function Profile() {
     </StyledProfile>
   );
 }
+
+export default connect (mapStateToProps, {addPlantStart}) (Profile);
 
 const StyledProfile = styled.div`
   * {
