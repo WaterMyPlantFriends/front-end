@@ -53,6 +53,9 @@ export default function Profile() {
                 <button id="profile">EDIT PROFILE</button>
               </Link>
             </div>
+            <div>
+              <button id="addplant">ADD PLANT</button>
+            </div>
         </div>
       </div>
     </StyledProfile>
